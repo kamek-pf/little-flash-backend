@@ -1,0 +1,232 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://little-flash.appspot.com/_ah/api",
+  "name" : "flashendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://little-flash.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "littleflash.com",
+  "ownerName" : "littleflash.com",
+  "packagePath" : "backend",
+  "methods" : {
+    "flashendpoint.insertFlash" : {
+      "path" : "flash",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.insertFlash",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "flashendpoint.listFlash" : {
+      "path" : "flash",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.listFlash",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "flashendpoint.getFlash" : {
+      "path" : "flash/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.getFlash",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "flashendpoint.updateFlash" : {
+      "path" : "flash",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.updateFlash",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "flashendpoint.removeFlash" : {
+      "path" : "flash/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.removeFlash",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Flash" : {
+        "id" : "Flash",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "shopId" : {
+            "type" : "string"
+          },
+          "itemId" : {
+            "type" : "string"
+          },
+          "itemType" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "string"
+          },
+          "flashDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "Key" : {
+        "id" : "Key",
+        "type" : "object",
+        "properties" : {
+          "kind" : {
+            "type" : "string"
+          },
+          "appId" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "parent" : {
+            "$ref" : "Key"
+          },
+          "complete" : {
+            "type" : "boolean"
+          },
+          "namespace" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Flash" : {
+        "id" : "CollectionResponse_Flash",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Flash"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.littleflash.backend.FlashEndpoint.insertFlash" : {
+        "request" : {
+          "$ref" : "Flash"
+        },
+        "response" : {
+          "$ref" : "Flash"
+        }
+      },
+      "com.littleflash.backend.FlashEndpoint.listFlash" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Flash"
+        }
+      },
+      "com.littleflash.backend.FlashEndpoint.getFlash" : {
+        "response" : {
+          "$ref" : "Flash"
+        }
+      },
+      "com.littleflash.backend.FlashEndpoint.updateFlash" : {
+        "request" : {
+          "$ref" : "Flash"
+        },
+        "response" : {
+          "$ref" : "Flash"
+        }
+      },
+      "com.littleflash.backend.FlashEndpoint.removeFlash" : {
+      }
+    }
+  }
+}

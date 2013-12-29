@@ -1,0 +1,13 @@
+gen/
+build/
+bin/
+
+.settings/
+.project
+.classpath
+.gitignore
+
+local.properties
+proguard-project.txt
+
+*.swp
