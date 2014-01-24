@@ -2,7 +2,6 @@ package com.littleflash.admin;
 
 import java.io.IOException;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,7 +18,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.googlecode.objectify.ObjectifyService;
-import com.littleflash.backend.Flash;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
