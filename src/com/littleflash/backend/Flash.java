@@ -18,8 +18,9 @@ public class Flash {
 	private String itemId;
     private String itemType;
     private String price;
+    private String userEmail;
     private Date flashDate;
-    
+   
     public String getShopId() {
 		return shopId;
 	}
@@ -67,4 +68,12 @@ public class Flash {
     public Key getKey() {
         return key;
     }
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 }

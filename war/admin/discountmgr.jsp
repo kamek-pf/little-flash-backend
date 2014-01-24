@@ -35,16 +35,21 @@
             <section>
             	<h2>Manage Discounts</h2>
                 <p>
-                	You can manage the discounts of your store currently available in Little Flash from
-                	this page.
+                    You can manage your sales from this page.
+                    When adding new sales, people who flashed the item's QR code will be notified by email automatically.
                 </p>
                 <form action="/admin/" method="post" role="form">
 					<div class="form-group">
 						<label>Item ID : </label>
 						<input type="text" name="item_id" class="form-control" />
 					</div>
+                    <div class="form-group">
+						<label>Item name : </label>
+						<input type="text" name="item_name" class="form-control" />
+					</div>
+
 					<div class="form-group">
-						<label>Discount rate : </label>
+                        <label>Discount rate (X means X% off): </label>
 						<input type="number" name="rate" class="form-control" />
 					</div>
 					<div class="form-group">

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"ykhqEJ_LDFBNzs2RnXtIc2-QyAc/X9eTCSSryL63LTaY90sOVBwR4KQ\"",
+ "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/BoH2BU986vXw_doh7e75KAKr0DQ\"",
  "discoveryVersion": "v1",
  "id": "flashendpoint:v1",
  "name": "flashendpoint",
@@ -108,6 +108,9 @@
      "type": "string"
     },
     "shopId": {
+     "type": "string"
+    },
+    "userEmail": {
      "type": "string"
     }
    }

@@ -10,8 +10,11 @@ public class Discount {
     @Index Date date;
     
     String item_id;
+    String item_name;
     String message;
 	double rate;
+	double old_price;
+	double new_price;
     
     // Empty constructor IS needed when using
     // Objectify (unless you like error 500)

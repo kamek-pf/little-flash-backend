@@ -148,6 +148,9 @@
           "price" : {
             "type" : "string"
           },
+          "userEmail" : {
+            "type" : "string"
+          },
           "flashDate" : {
             "type" : "string",
             "format" : "date-time"
