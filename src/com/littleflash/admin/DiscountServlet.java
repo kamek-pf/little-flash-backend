@@ -54,6 +54,7 @@ public class DiscountServlet extends HttpServlet {
             // Saving object in DataStore using Objectify
             ofy().save().entity(discount).now();
 
+            /*
             // Getting a list of everybody interested in the item
             List<Flash> flashes = ofy().load().type(Flash.class).order("-date").limit(5).list();
             Iterator<Flash> iterator = flashes.iterator();
@@ -62,6 +63,7 @@ public class DiscountServlet extends HttpServlet {
                 if(iterator.next().getItemId() != req.getParameter("item_id"))
                     iterator.remove();
             }
+            */
             // Sending mail to everybody who flashed the item
             Properties props = new Properties();
             Session session = Session.getDefaultInstance(props, null);
