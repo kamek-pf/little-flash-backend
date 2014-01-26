@@ -34,13 +34,34 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.insertFlash",
+      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.insertFlash",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "flashendpoint.removeFlash" : {
+      "path" : "flash/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.removeFlash",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "flashendpoint.listFlash" : {
@@ -50,7 +71,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.listFlash",
+      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.listFlash",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -75,7 +96,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.getFlash",
+      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.getFlash",
       "request" : {
         "parameters" : {
           "id" : {
@@ -96,34 +117,13 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.updateFlash",
+      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.updateFlash",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "flashendpoint.removeFlash" : {
-      "path" : "flash/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.FlashEndpoint.removeFlash",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     }
   },
@@ -136,24 +136,11 @@
           "key" : {
             "$ref" : "Key"
           },
-          "shopId" : {
-            "type" : "string"
-          },
           "itemId" : {
-            "type" : "string"
-          },
-          "itemType" : {
-            "type" : "string"
-          },
-          "price" : {
             "type" : "string"
           },
           "userEmail" : {
             "type" : "string"
-          },
-          "flashDate" : {
-            "type" : "string",
-            "format" : "date-time"
           }
         }
       },
@@ -202,7 +189,7 @@
       }
     },
     "methods" : {
-      "com.littleflash.backend.FlashEndpoint.insertFlash" : {
+      "com.littleflash.endpoint.FlashEndpoint.insertFlash" : {
         "request" : {
           "$ref" : "Flash"
         },
@@ -210,25 +197,25 @@
           "$ref" : "Flash"
         }
       },
-      "com.littleflash.backend.FlashEndpoint.listFlash" : {
+      "com.littleflash.endpoint.FlashEndpoint.removeFlash" : {
+      },
+      "com.littleflash.endpoint.FlashEndpoint.listFlash" : {
         "response" : {
           "$ref" : "CollectionResponse_Flash"
         }
       },
-      "com.littleflash.backend.FlashEndpoint.getFlash" : {
+      "com.littleflash.endpoint.FlashEndpoint.getFlash" : {
         "response" : {
           "$ref" : "Flash"
         }
       },
-      "com.littleflash.backend.FlashEndpoint.updateFlash" : {
+      "com.littleflash.endpoint.FlashEndpoint.updateFlash" : {
         "request" : {
           "$ref" : "Flash"
         },
         "response" : {
           "$ref" : "Flash"
         }
-      },
-      "com.littleflash.backend.FlashEndpoint.removeFlash" : {
       }
     }
   }

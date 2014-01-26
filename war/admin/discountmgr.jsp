@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.littleflash.admin.Discount" %>
+<%@ page import="com.littleflash.backend.Discount" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.littleflash.backend.Item" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,18 +40,27 @@
                     You can manage your sales from this page.
                     When adding new sales, people who flashed the item's QR code will be notified by email automatically.
                 </p>
+                <p>
+                    First, enter the item's data :
+                </p>
                 <form action="/admin/" method="post" role="form">
 					<div class="form-group">
-						<label>Item ID : </label>
+						<label>Reference: </label>
 						<input type="text" name="item_id" class="form-control" />
 					</div>
                     <div class="form-group">
-						<label>Item name : </label>
+						<label>Name : </label>
 						<input type="text" name="item_name" class="form-control" />
 					</div>
-
+                    <div class="form-group">
+						<label>Original price : </label>
+						<input type="text" name="item_price" class="form-control" />
+					</div>
+                    <p>
+                        Then, enter the sale's information :
+                    </p>
 					<div class="form-group">
-                        <label>Discount rate (X means X% off): </label>
+                        <label>Discount rate (Ex: 40 means 40% off): </label>
 						<input type="number" name="rate" class="form-control" />
 					</div>
 					<div class="form-group">
@@ -65,19 +76,34 @@
                 <table class="table">
 					<thead>
 						<tr>
-							<th>Item ID</th>
+							<th>Reference</th>
+							<th>Name</th>
+							<th>Original price</th>
 							<th>Rate</th>
-							<th>Info</th>
+							<th>New price</th>
+							<th>Message</th>
 						</tr>
 					</thead>
 					<tbody>
 		                <%
-							List<Discount> discounts = (List<Discount>) request.getAttribute("discounts");
-							for (Discount discount : discounts) {
+			                List<Discount> discounts = (List<Discount>) request.getAttribute("discounts");
+			                List<Item> items = (List<Item>) request.getAttribute("items");
+			                Iterator<Discount> dI = discounts.iterator();
+			                Iterator<Item> iI = items.iterator();
+			                
+			                while(iI.hasNext() && dI.hasNext())
+			                {
+			                	Discount discount = dI.next();
+			                	Item item = iI.next();
+			                	
+			                	double newPrice = item.getPrice() - (item.getPrice() * discount.getRate() / 100);
 						%>				
 						<tr>
-							<td><%= discount.getItemID() %></td>
+							<td><%= item.getItemId() %></td>
+							<td><%= item.getItemName() %></td>
+							<td><%= item.getPrice() %></td>
 							<td><%= discount.getRate() %> %</td>
+							<td><%= newPrice %></td>
 							<td><%= discount.getMessage() %></td>
 						</tr>
 						<%

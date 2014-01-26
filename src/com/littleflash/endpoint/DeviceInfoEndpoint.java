@@ -1,7 +1,7 @@
-package com.littleflash.backend;
+package com.littleflash.endpoint;
 
+import com.littleflash.backend.DeviceInfo;
 import com.littleflash.backend.EMF;
-
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -13,12 +13,13 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 import javax.inject.Named;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-@Api(name = "checkinendpoint", namespace = @ApiNamespace(ownerDomain = "littleflash.com", ownerName = "littleflash.com", packagePath = "activities"))
-public class CheckInEndpoint {
+@Api(name = "deviceinfoendpoint", namespace = @ApiNamespace(ownerDomain = "littleflash.com", ownerName = "littleflash.com", packagePath = "activities"))
+public class DeviceInfoEndpoint {
 
 	/**
 	 * This method lists all the entities inserted in datastore.
@@ -28,18 +29,19 @@ public class CheckInEndpoint {
 	 * persisted and a cursor to the next page.
 	 */
 	@SuppressWarnings({ "unchecked", "unused" })
-	@ApiMethod(name = "listCheckIn")
-	public CollectionResponse<CheckIn> listCheckIn(
+	@ApiMethod(name = "listDeviceInfo")
+	public CollectionResponse<DeviceInfo> listDeviceInfo(
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("limit") Integer limit) {
 
 		EntityManager mgr = null;
 		Cursor cursor = null;
-		List<CheckIn> execute = null;
+		List<DeviceInfo> execute = null;
 
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from CheckIn as CheckIn");
+			Query query = mgr
+					.createQuery("select from DeviceInfo as DeviceInfo");
 			if (cursorString != null && cursorString != "") {
 				cursor = Cursor.fromWebSafeString(cursorString);
 				query.setHint(JPACursorHelper.CURSOR_HINT, cursor);
@@ -50,20 +52,20 @@ public class CheckInEndpoint {
 				query.setMaxResults(limit);
 			}
 
-			execute = (List<CheckIn>) query.getResultList();
+			execute = (List<DeviceInfo>) query.getResultList();
 			cursor = JPACursorHelper.getCursor(execute);
 			if (cursor != null)
 				cursorString = cursor.toWebSafeString();
 
 			// Tight loop for fetching all entities from datastore and accomodate
 			// for lazy fetch.
-			for (CheckIn obj : execute)
+			for (DeviceInfo obj : execute)
 				;
 		} finally {
 			mgr.close();
 		}
 
-		return CollectionResponse.<CheckIn> builder().setItems(execute)
+		return CollectionResponse.<DeviceInfo> builder().setItems(execute)
 				.setNextPageToken(cursorString).build();
 	}
 
@@ -73,16 +75,16 @@ public class CheckInEndpoint {
 	 * @param id the primary key of the java bean.
 	 * @return The entity with primary key id.
 	 */
-	@ApiMethod(name = "getCheckIn")
-	public CheckIn getCheckIn(@Named("id") Long id) {
+	@ApiMethod(name = "getDeviceInfo")
+	public DeviceInfo getDeviceInfo(@Named("id") String id) {
 		EntityManager mgr = getEntityManager();
-		CheckIn checkin = null;
+		DeviceInfo deviceinfo = null;
 		try {
-			checkin = mgr.find(CheckIn.class, id);
+			deviceinfo = mgr.find(DeviceInfo.class, id);
 		} finally {
 			mgr.close();
 		}
-		return checkin;
+		return deviceinfo;
 	}
 
 	/**
@@ -90,18 +92,21 @@ public class CheckInEndpoint {
 	 * exists in the datastore, an exception is thrown.
 	 * It uses HTTP POST method.
 	 *
-	 * @param checkin the entity to be inserted.
+	 * @param deviceinfo the entity to be inserted.
 	 * @return The inserted entity.
 	 */
-	@ApiMethod(name = "insertCheckIn")
-	public CheckIn insertCheckIn(CheckIn checkin) {
+	@ApiMethod(name = "insertDeviceInfo")
+	public DeviceInfo insertDeviceInfo(DeviceInfo deviceinfo) {
 		EntityManager mgr = getEntityManager();
 		try {
-			mgr.persist(checkin);
+			if (containsDeviceInfo(deviceinfo)) {
+				throw new EntityExistsException("Object already exists");
+			}
+			mgr.persist(deviceinfo);
 		} finally {
 			mgr.close();
 		}
-		return checkin;
+		return deviceinfo;
 	}
 
 	/**
@@ -109,21 +114,21 @@ public class CheckInEndpoint {
 	 * exist in the datastore, an exception is thrown.
 	 * It uses HTTP PUT method.
 	 *
-	 * @param checkin the entity to be updated.
+	 * @param deviceinfo the entity to be updated.
 	 * @return The updated entity.
 	 */
-	@ApiMethod(name = "updateCheckIn")
-	public CheckIn updateCheckIn(CheckIn checkin) {
+	@ApiMethod(name = "updateDeviceInfo")
+	public DeviceInfo updateDeviceInfo(DeviceInfo deviceinfo) {
 		EntityManager mgr = getEntityManager();
 		try {
-			if (!containsCheckIn(checkin)) {
+			if (!containsDeviceInfo(deviceinfo)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.persist(checkin);
+			mgr.persist(deviceinfo);
 		} finally {
 			mgr.close();
 		}
-		return checkin;
+		return deviceinfo;
 	}
 
 	/**
@@ -132,22 +137,23 @@ public class CheckInEndpoint {
 	 *
 	 * @param id the primary key of the entity to be deleted.
 	 */
-	@ApiMethod(name = "removeCheckIn")
-	public void removeCheckIn(@Named("id") Long id) {
+	@ApiMethod(name = "removeDeviceInfo")
+	public void removeDeviceInfo(@Named("id") String id) {
 		EntityManager mgr = getEntityManager();
 		try {
-			CheckIn checkin = mgr.find(CheckIn.class, id);
-			mgr.remove(checkin);
+			DeviceInfo deviceinfo = mgr.find(DeviceInfo.class, id);
+			mgr.remove(deviceinfo);
 		} finally {
 			mgr.close();
 		}
 	}
 
-	private boolean containsCheckIn(CheckIn checkin) {
+	private boolean containsDeviceInfo(DeviceInfo deviceinfo) {
 		EntityManager mgr = getEntityManager();
 		boolean contains = true;
 		try {
-			CheckIn item = mgr.find(CheckIn.class, checkin.getKey());
+			DeviceInfo item = mgr.find(DeviceInfo.class,
+					deviceinfo.getDeviceRegistrationID());
 			if (item == null) {
 				contains = false;
 			}

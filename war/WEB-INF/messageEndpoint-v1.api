@@ -34,7 +34,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.MessageEndpoint.listMessages",
+      "rosyMethod" : "com.littleflash.endpoint.MessageEndpoint.listMessages",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -59,7 +59,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.MessageEndpoint.sendMessage",
+      "rosyMethod" : "com.littleflash.endpoint.MessageEndpoint.sendMessage",
       "request" : {
         "parameters" : {
           "message" : {
@@ -137,12 +137,12 @@
       }
     },
     "methods" : {
-      "com.littleflash.backend.MessageEndpoint.listMessages" : {
+      "com.littleflash.endpoint.MessageEndpoint.listMessages" : {
         "response" : {
           "$ref" : "CollectionResponse_MessageData"
         }
       },
-      "com.littleflash.backend.MessageEndpoint.sendMessage" : {
+      "com.littleflash.endpoint.MessageEndpoint.sendMessage" : {
       }
     }
   }

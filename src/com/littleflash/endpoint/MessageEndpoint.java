@@ -1,4 +1,4 @@
-package com.littleflash.backend;
+package com.littleflash.endpoint;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +18,9 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JPACursorHelper;
+import com.littleflash.backend.DeviceInfo;
+import com.littleflash.backend.EMF;
+import com.littleflash.backend.MessageData;
 
 
 /**

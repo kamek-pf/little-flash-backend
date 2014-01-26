@@ -27,43 +27,6 @@
   "ownerName" : "littleflash.com",
   "packagePath" : "activities",
   "methods" : {
-    "deviceinfoendpoint.insertDeviceInfo" : {
-      "path" : "deviceinfo",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.DeviceInfoEndpoint.insertDeviceInfo",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "deviceinfoendpoint.removeDeviceInfo" : {
-      "path" : "deviceinfo/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.DeviceInfoEndpoint.removeDeviceInfo",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "deviceinfoendpoint.listDeviceInfo" : {
       "path" : "deviceinfo",
       "httpMethod" : "GET",
@@ -71,7 +34,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.DeviceInfoEndpoint.listDeviceInfo",
+      "rosyMethod" : "com.littleflash.endpoint.DeviceInfoEndpoint.listDeviceInfo",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -96,7 +59,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.DeviceInfoEndpoint.updateDeviceInfo",
+      "rosyMethod" : "com.littleflash.endpoint.DeviceInfoEndpoint.updateDeviceInfo",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -112,7 +75,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.DeviceInfoEndpoint.getDeviceInfo",
+      "rosyMethod" : "com.littleflash.endpoint.DeviceInfoEndpoint.getDeviceInfo",
       "request" : {
         "parameters" : {
           "id" : {
@@ -125,10 +88,62 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "deviceinfoendpoint.insertDeviceInfo" : {
+      "path" : "deviceinfo",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.endpoint.DeviceInfoEndpoint.insertDeviceInfo",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "deviceinfoendpoint.removeDeviceInfo" : {
+      "path" : "deviceinfo/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.endpoint.DeviceInfoEndpoint.removeDeviceInfo",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponse_DeviceInfo" : {
+        "id" : "CollectionResponse_DeviceInfo",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "DeviceInfo"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "DeviceInfo" : {
         "id" : "DeviceInfo",
         "type" : "object",
@@ -144,40 +159,15 @@
             "format" : "int64"
           }
         }
-      },
-      "CollectionResponse_DeviceInfo" : {
-        "id" : "CollectionResponse_DeviceInfo",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "DeviceInfo"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
       }
     },
     "methods" : {
-      "com.littleflash.backend.DeviceInfoEndpoint.insertDeviceInfo" : {
-        "request" : {
-          "$ref" : "DeviceInfo"
-        },
-        "response" : {
-          "$ref" : "DeviceInfo"
-        }
-      },
-      "com.littleflash.backend.DeviceInfoEndpoint.removeDeviceInfo" : {
-      },
-      "com.littleflash.backend.DeviceInfoEndpoint.listDeviceInfo" : {
+      "com.littleflash.endpoint.DeviceInfoEndpoint.listDeviceInfo" : {
         "response" : {
           "$ref" : "CollectionResponse_DeviceInfo"
         }
       },
-      "com.littleflash.backend.DeviceInfoEndpoint.updateDeviceInfo" : {
+      "com.littleflash.endpoint.DeviceInfoEndpoint.updateDeviceInfo" : {
         "request" : {
           "$ref" : "DeviceInfo"
         },
@@ -185,10 +175,20 @@
           "$ref" : "DeviceInfo"
         }
       },
-      "com.littleflash.backend.DeviceInfoEndpoint.getDeviceInfo" : {
+      "com.littleflash.endpoint.DeviceInfoEndpoint.getDeviceInfo" : {
         "response" : {
           "$ref" : "DeviceInfo"
         }
+      },
+      "com.littleflash.endpoint.DeviceInfoEndpoint.insertDeviceInfo" : {
+        "request" : {
+          "$ref" : "DeviceInfo"
+        },
+        "response" : {
+          "$ref" : "DeviceInfo"
+        }
+      },
+      "com.littleflash.endpoint.DeviceInfoEndpoint.removeDeviceInfo" : {
       }
     }
   }

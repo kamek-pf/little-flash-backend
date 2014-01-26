@@ -1,7 +1,7 @@
-package com.littleflash.backend;
+package com.littleflash.endpoint;
 
 import com.littleflash.backend.EMF;
-
+import com.littleflash.backend.Flash;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -13,7 +13,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 import javax.inject.Named;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -98,9 +97,6 @@ public class FlashEndpoint {
 	public Flash insertFlash(Flash flash) {
 		EntityManager mgr = getEntityManager();
 		try {
-			if (containsFlash(flash)) {
-				throw new EntityExistsException("Object already exists");
-			}
 			mgr.persist(flash);
 		} finally {
 			mgr.close();

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/BoH2BU986vXw_doh7e75KAKr0DQ\"",
+ "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/5V6Ulp5U2zZ_eCoTew6qkb0bhx0\"",
  "discoveryVersion": "v1",
  "id": "flashendpoint:v1",
  "name": "flashendpoint",
@@ -93,24 +93,11 @@
    "id": "Flash",
    "type": "object",
    "properties": {
-    "flashDate": {
-     "type": "string",
-     "format": "date-time"
-    },
     "itemId": {
-     "type": "string"
-    },
-    "itemType": {
      "type": "string"
     },
     "key": {
      "$ref": "Key"
-    },
-    "price": {
-     "type": "string"
-    },
-    "shopId": {
-     "type": "string"
     },
     "userEmail": {
      "type": "string"

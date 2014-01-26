@@ -27,6 +27,38 @@
   "ownerName" : "littleflash.com",
   "packagePath" : "activities",
   "methods" : {
+    "checkinendpoint.updateCheckIn" : {
+      "path" : "checkin",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.endpoint.CheckInEndpoint.updateCheckIn",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "checkinendpoint.insertCheckIn" : {
+      "path" : "checkin",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.endpoint.CheckInEndpoint.insertCheckIn",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "checkinendpoint.listCheckIn" : {
       "path" : "checkin",
       "httpMethod" : "GET",
@@ -34,7 +66,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.CheckInEndpoint.listCheckIn",
+      "rosyMethod" : "com.littleflash.endpoint.CheckInEndpoint.listCheckIn",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -52,22 +84,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "checkinendpoint.updateCheckIn" : {
-      "path" : "checkin",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.CheckInEndpoint.updateCheckIn",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "checkinendpoint.removeCheckIn" : {
       "path" : "checkin/{id}",
       "httpMethod" : "DELETE",
@@ -75,7 +91,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.CheckInEndpoint.removeCheckIn",
+      "rosyMethod" : "com.littleflash.endpoint.CheckInEndpoint.removeCheckIn",
       "request" : {
         "parameters" : {
           "id" : {
@@ -89,22 +105,6 @@
         "body" : "empty"
       }
     },
-    "checkinendpoint.insertCheckIn" : {
-      "path" : "checkin",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.CheckInEndpoint.insertCheckIn",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "checkinendpoint.getCheckIn" : {
       "path" : "checkin/{id}",
       "httpMethod" : "GET",
@@ -112,7 +112,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.backend.CheckInEndpoint.getCheckIn",
+      "rosyMethod" : "com.littleflash.endpoint.CheckInEndpoint.getCheckIn",
       "request" : {
         "parameters" : {
           "id" : {
@@ -129,21 +129,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_CheckIn" : {
-        "id" : "CollectionResponse_CheckIn",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "CheckIn"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "CheckIn" : {
         "id" : "CheckIn",
         "type" : "object",
@@ -190,33 +175,48 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_CheckIn" : {
+        "id" : "CollectionResponse_CheckIn",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "CheckIn"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "com.littleflash.backend.CheckInEndpoint.listCheckIn" : {
+      "com.littleflash.endpoint.CheckInEndpoint.updateCheckIn" : {
+        "request" : {
+          "$ref" : "CheckIn"
+        },
+        "response" : {
+          "$ref" : "CheckIn"
+        }
+      },
+      "com.littleflash.endpoint.CheckInEndpoint.insertCheckIn" : {
+        "request" : {
+          "$ref" : "CheckIn"
+        },
+        "response" : {
+          "$ref" : "CheckIn"
+        }
+      },
+      "com.littleflash.endpoint.CheckInEndpoint.listCheckIn" : {
         "response" : {
           "$ref" : "CollectionResponse_CheckIn"
         }
       },
-      "com.littleflash.backend.CheckInEndpoint.updateCheckIn" : {
-        "request" : {
-          "$ref" : "CheckIn"
-        },
-        "response" : {
-          "$ref" : "CheckIn"
-        }
+      "com.littleflash.endpoint.CheckInEndpoint.removeCheckIn" : {
       },
-      "com.littleflash.backend.CheckInEndpoint.removeCheckIn" : {
-      },
-      "com.littleflash.backend.CheckInEndpoint.insertCheckIn" : {
-        "request" : {
-          "$ref" : "CheckIn"
-        },
-        "response" : {
-          "$ref" : "CheckIn"
-        }
-      },
-      "com.littleflash.backend.CheckInEndpoint.getCheckIn" : {
+      "com.littleflash.endpoint.CheckInEndpoint.getCheckIn" : {
         "response" : {
           "$ref" : "CheckIn"
         }

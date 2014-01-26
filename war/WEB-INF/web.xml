@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<servlet>
 		<servlet-name>DiscountManager</servlet-name>
-		<servlet-class>com.littleflash.admin.DiscountServlet</servlet-class>
+		<servlet-class>com.littleflash.servlet.DiscountServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DiscountManager</servlet-name>
@@ -21,7 +21,7 @@
 		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
 		<init-param>
 			<param-name>services</param-name>
-			<param-value>com.littleflash.backend.CheckInEndpoint,com.littleflash.backend.DeviceInfoEndpoint,com.littleflash.backend.FlashEndpoint,com.littleflash.backend.MessageEndpoint</param-value>
+			<param-value>com.littleflash.endpoint.CheckInEndpoint,com.littleflash.endpoint.DeviceInfoEndpoint,com.littleflash.endpoint.FlashEndpoint,com.littleflash.endpoint.MessageEndpoint</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

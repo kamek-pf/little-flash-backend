@@ -1,20 +1,14 @@
-package com.littleflash.admin;
+package com.littleflash.backend;
 
-import java.util.Date;
 import com.googlecode.objectify.annotation.*;
 
 @Entity
 @Cache
 public class Discount {
-    @Id Long id;
-    @Index Date date;
-    
-    String item_id;
-    String item_name;
+    @Id Long dataStoreId;
+    String itemId;
     String message;
 	double rate;
-	double old_price;
-	double new_price;
     
     // Empty constructor IS needed when using
     // Objectify (unless you like error 500)
@@ -22,28 +16,19 @@ public class Discount {
     @SuppressWarnings("unused")
 	private Discount() {}
     
-    public Discount(String item_id, String message, double rate) {
-        this.item_id = item_id;
+    public Discount(String itemId, String message, double rate) {
+        this.itemId = itemId;
     	this.message = message;
     	this.rate = rate;
-        this.date = new Date();
     }
     
-    public Date getDate() {
-        return date;
-    }
-    
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public String getItemId() {
+		return itemId;
+	}
 
-    public String getItemID() {
-        return item_id;
-    }
-    
-    public void setItemID(String item_id) {
-        this.item_id = item_id;
-    }
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
     
     public String getMessage() {
 		return message;
