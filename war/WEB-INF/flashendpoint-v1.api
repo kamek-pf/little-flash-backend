@@ -43,27 +43,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "flashendpoint.removeFlash" : {
-      "path" : "flash/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.removeFlash",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "flashendpoint.listFlash" : {
       "path" : "flash",
       "httpMethod" : "GET",
@@ -87,6 +66,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "flashendpoint.removeFlash" : {
+      "path" : "flash/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.littleflash.endpoint.FlashEndpoint.removeFlash",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "flashendpoint.getFlash" : {
@@ -161,14 +161,14 @@
           "name" : {
             "type" : "string"
           },
-          "parent" : {
-            "$ref" : "Key"
-          },
           "complete" : {
             "type" : "boolean"
           },
           "namespace" : {
             "type" : "string"
+          },
+          "parent" : {
+            "$ref" : "Key"
           }
         }
       },
@@ -197,12 +197,12 @@
           "$ref" : "Flash"
         }
       },
-      "com.littleflash.endpoint.FlashEndpoint.removeFlash" : {
-      },
       "com.littleflash.endpoint.FlashEndpoint.listFlash" : {
         "response" : {
           "$ref" : "CollectionResponse_Flash"
         }
+      },
+      "com.littleflash.endpoint.FlashEndpoint.removeFlash" : {
       },
       "com.littleflash.endpoint.FlashEndpoint.getFlash" : {
         "response" : {
