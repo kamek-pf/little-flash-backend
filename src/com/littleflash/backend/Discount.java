@@ -1,11 +1,15 @@
 package com.littleflash.backend;
 
+
+import java.util.Date;
+
 import com.googlecode.objectify.annotation.*;
 
 @Entity
 @Cache
 public class Discount {
     @Id Long dataStoreId;
+    @Index Date date;
     String itemId;
     String message;
 	double rate;
@@ -20,6 +24,7 @@ public class Discount {
         this.itemId = itemId;
     	this.message = message;
     	this.rate = rate;
+    	this.date = new Date();
     }
     
     public String getItemId() {
@@ -30,6 +35,14 @@ public class Discount {
 		this.itemId = itemId;
 	}
     
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
     public String getMessage() {
 		return message;
 	}

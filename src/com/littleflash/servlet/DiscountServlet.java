@@ -38,8 +38,8 @@ public class DiscountServlet extends HttpServlet {
         try {
             // Objectify Request
         	ofy().clear();
-            List<Discount> discounts = ofy().load().type(Discount.class).list();
-            List<Item> items = ofy().load().type(Item.class).list();
+            List<Discount> discounts = ofy().load().type(Discount.class).order("-date").list();
+            List<Item> items = ofy().load().type(Item.class).order("-date").list();
             
             req.setAttribute("discounts", discounts);
             req.setAttribute("items", items);
@@ -73,9 +73,9 @@ public class DiscountServlet extends HttpServlet {
             // Send mail to everyone interested
             for (Entity result : pq.asIterable())
             {
-            	String msgBody = "An item you want is on sale !"
+            	String msgBody = req.getParameter("item_name") + " is on sale !"
                         + "\n \n"
-                		+ req.getParameter("item_id") + " - " + req.getParameter("rate") + "% off"
+                		+ req.getParameter("item_id") + " - " + req.getParameter("item_name") + " : " + req.getParameter("rate") + "% off"
                         + "\n \n"
                 		+ req.getParameter("message");
             	
@@ -90,7 +90,7 @@ public class DiscountServlet extends HttpServlet {
             		 Message msg = new MimeMessage(session);
                      msg.setFrom(new InternetAddress("noreply@little-flash.appspotmail.com", "LittleFlash"));
                      msg.addRecipient(Message.RecipientType.TO, new InternetAddress(resultEmail));
-            		 msg.setSubject("Item on sale !");
+            		 msg.setSubject(req.getParameter("item_name") + " is on sale !");
                      msg.setText(msgBody);
                      Transport.send(msg);
             	}
